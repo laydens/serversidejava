@@ -20,14 +20,10 @@ public class TaxReturnServlet extends HttpServlet {
 		
 		String income = request.getParameter("income");
 		String deductions = request.getParameter("deductions");
-		response.getWriter().print("<br/>You told us your income is: " + income);
-		response.getWriter().print("<br/>Your deductions are: " + deductions);
-		response.getWriter().print("<br/>Your taxable income is: " + TaxationService.getTaxableIncome(Integer.parseInt(income), Integer.parseInt(deductions)));
-		response.getWriter().print("<br/>Your federal tax is: " + TaxationService.getFederalTax(Integer.parseInt(income), Integer.parseInt(deductions)));
-		response.getWriter().print("<br/>Your state tax is: " + TaxationService.getStateTax(Integer.parseInt(income), Integer.parseInt(deductions)));
-		response.getWriter().print("<br/>Your total taxes owing is: " + TaxationService.getTaxesOwing(Integer.parseInt(income), Integer.parseInt(deductions)));
-		
-		response.getWriter().print("<br/><br/>By the way, this came from the logic-less doPost!");
+		TaxReturn taxReturn = TaxationService.getTaxReturn(Integer.parseInt(income), Integer.parseInt(deductions));
+		request.setAttribute("taxreturn", taxReturn);
+		request.getRequestDispatcher("taxdisplay.jsp").forward(request, response);
+	
 	}
 	
 	@Override

@@ -5,6 +5,11 @@ public class TaxationService {
 	static int stateRate = 5;
 	static int fedRate = 25;
 
+	
+	public static TaxReturn getTaxReturn(int i, int d) {
+		return new TaxReturn(i,d);
+	}
+	
 	public static int getTaxableIncome(int i, int d) {
 		return i - d;
 	}
