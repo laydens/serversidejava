@@ -1,0 +1,76 @@
+<html>
+<head>
+
+<script>
+
+var stateRate = .05;
+var fedRate = .25;
+
+function TaxReturn(i, d) {
+    this.income = i;
+    this.deductions = d;
+
+	this.getTaxableIncome = getTaxableIncome;
+	function getTaxableIncome() {
+    	var taxableIncome =  this.income - this.deductions;
+		return taxableIncome;
+    }
+	
+	this.getStateTax = getStateTax;
+	function getStateTax() {
+    	var stateTax =  this.getTaxableIncome() * stateRate;
+		return stateTax;
+    }
+	
+	this.getFederalTax = getFederalTax;
+	function getFederalTax() {
+    	var federalTax =  this.getTaxableIncome() * fedRate;
+		return federalTax;
+    }
+	
+	this.getTaxesOwing = getTaxesOwing;
+	function getTaxesOwing() {
+    	var taxesOwing =  this.getFederalTax() + this.getStateTax();
+		return taxesOwing;
+    }
+	
+}
+
+calculateTaxes = function(){
+
+	income = document.getElementById('income').value;
+	deductions = document.getElementById('deductions').value;
+
+	var taxReturn = new TaxReturn(income, deductions);
+
+	document.getElementById('preamble').innerHTML = '<HR/>Here is a summary of your taxes:';
+	document.getElementById('taxableincome').innerHTML = 'Taxable income: $' + taxReturn.getTaxableIncome();
+	document.getElementById('federaltax').innerHTML = 'Federal taxes: $' + taxReturn.getFederalTax();
+	document.getElementById('statetax').innerHTML = 'State taxes: $'+ taxReturn.getStateTax();
+    document.getElementById('taxesowing').innerHTML = 'Total taxes: $'+ taxReturn.getTaxesOwing();
+}
+
+</script>	
+
+</head>
+<body>
+Please enter the following information:<br/>
+Total income: 		<input id="income" type="text" name="firstname"><br>
+Total deductions: 	<input id="deductions" type="text" name="lastname"><br>
+
+
+<a href="#" onclick="calculateTaxes()">Submit</a>
+
+<br/><br/>
+
+<div id="preamble"></div>	
+<br/>
+<div id="taxableincome"></div>	
+<div id="federaltax"></div>	
+<div id="statetax"></div> 
+<div id="taxesowing"></div>
+<hr/>
+
+
+</body>
+</html>
