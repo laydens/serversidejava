@@ -3,8 +3,30 @@
 <title>Tax Calculator</title>
 </head>
 <body>
-<a href="www.theserverside.com">The Server Side!</a>
-Today's date is: <%= new java.util.Date() %>
-Oh, by the way, Hello World!!!
+
+<%
+
+String income = request.getParameter("income");
+String deductions = request.getParameter("deduction");
+
+if (income != null) {
+
+	out.print("You told us your income is: " + income);
+
+} else {
+
+%>
+
+Please tell us your income:
+<form action="#">
+Total income: 	<input type="text" name="income"/><br/>
+Total deductions: <input type="text" name="deductions"/><br/>
+<input type="submit" name="submit"/>
+</form>
+ 
+ <%
+ }
+ %>
+
 </body>
 </html>
