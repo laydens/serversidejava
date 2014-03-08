@@ -26,6 +26,11 @@ var iterations;
 var displaySpot;
 var colorValue;
 
+window.onload = function() {
+
+	document.getElementById('link-1').onclick = function() { sayMyName(); };
+}
+
 function dropAndFade() {
 	if (iterations > 0) {
 		position = position + 25;
@@ -59,7 +64,7 @@ sayMyName = function() {
 
 <div id="nameblock">
 What is your name?<input id="name" type="text" name="myname"/>
-<a href="#" onclick="sayMyName()">submit</a><br/>
+<a id="link-1" href="#" >submit</a><br/>
 </div>
 
 

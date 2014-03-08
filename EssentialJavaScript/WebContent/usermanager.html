@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<script>
+
+function Registrant(first, last, phone, birth) {
+	this.firstName = first;
+	this.lastName = last;
+	this.homePhone = phone;
+	this.dob = birth;
+	this.dor = new Date();
+	
+	this.getFullName = getFullName;
+	function getFullName() {
+		var fullName = this.firstName + ' ' + this.lastName;
+		return fullName;
+	
+	}
+
+}
+
+register = function() {
+
+	firstName = document.getElementById('fn').value;
+	lastName = document.getElementById('ln').value;
+	phoneNumber = document.getElementById('phone').value;
+	dob = document.getElementById('dob').value;
+	
+	var registrant = new Registrant(firstName, lastName, phoneNumber, dob);
+	
+	document.getElementById('welcome').innerHTML = 'You have successfully registered, ' + registrant.getFullName() + '.';
+	document.getElementById('firstname').innerHTML = 'First name: ' + registrant.firstName;
+	document.getElementById('lastname').innerHTML = 'Last name: ' + registrant.lastName;
+	document.getElementById('homephone').innerHTML =  'Phone number: ' + registrant.homePhone;
+	document.getElementById('birthdate').innerHTML =  'Date of birth: ' + registrant.dob;
+	document.getElementById('registerdate').innerHTML = 'Registration date: ' + registrant.dor + '<hr/>';
+
+}
+
+validate = function() {
+	var element = document.getElementById('registrantdata');
+	var inputs = element.getElementsByTagName('input');
+	for (var i=0; i<inputs.length; i++) {
+		if (inputs[i].value.length<1){
+				alert('Blank fields are not allowed!');
+				return;
+		}
+	}
+	register();
+}
+
+
+</script>
+</head>
+<body>
+
+Please enter the following information: <br/>
+<div id="registrantdata">
+First name:		<input id="fn" type="text" name="firstname"/><br/>
+Last name:		<input id="ln" type="text" name="lastname"/><br/>
+Phone number:	<input id="phone" type="text" name="phone"/><br/>
+Date of birth: 	<input id="dob" type="text" name="dob"/><br/>
+<a href="#" onclick="validate()">Submit</a>
+</div>
+
+<hr/>
+<div id="welcome"></div><br/>
+<div id="firstname"></div>
+<div id="lastname"></div>
+<div id="homephone"></div>
+<div id="birthdate"></div><br/>
+<div id="registerdate"></div>
+
+
+
+</body>
+</html>
