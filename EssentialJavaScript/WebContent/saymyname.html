@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+sayMyName = function() {
+	username = document.getElementById('name').value;
+	output = username + " is the one who knocks.";
+	document.getElementById('display').innerHTML = output;
+}
+</script>
+
+</head>
+<body>
+
+What is your name?<input id="name" type="text" name="myname"/>
+<a href="#" onclick="sayMyName()">submit</a>
+<br/>
+<div id="display"></div>
+
+</body>
+</html>
