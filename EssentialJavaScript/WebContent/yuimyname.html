@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+div#nameblock {
+	left:10px;
+	top: 25px;
+	position:absolute;
+}
+
+div#display {
+	height:60px;
+	position:absolute;
+}
+
+
+</style>
+
+<script src="http://yui.yahooapis.com/3.4.1/build/yui/yui-min.js"></script>
+<script type="text/javascript">
+
+new YUI().use('anim', function(Y) {
+
+var sayMyName = function(e) {
+	username = document.getElementById('name').value;
+	output = username + " is the one who knocks.";
+	displaySpot = document.getElementById('display');
+	displaySpot.innerHTML = output;
+	animation.run();
+}
+
+var animation = new Y.Anim({
+	node: '#display',
+	from: {
+		top: 50,
+		left:50,
+		color: '#000000',
+		backgroundColor: '#FF0000'
+	},
+	to: {
+		top: 600,
+		left: 600,
+		color: '#FF0000',
+		backgroundColor: '#000000'
+	}
+})
+
+
+Y.on('click', sayMyName, '#link-1');
+
+
+});
+</script>
+
+</head>
+<body>
+
+<div id="nameblock">
+What is your name?<input id="name" type="text" name="myname"/>
+<a id="link-1" href="#">submit</a><br/>
+</div>
+
+
+<div id="display"></div>
+
+</body>
+</html>

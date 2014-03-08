@@ -1,20 +1,68 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style>
+div#nameblock {
+	left:10px;
+	top: 25px;
+	position:absolute;
+}
+
+div#display {
+	left:10px;
+	top: 50px;
+	color:rgb(255,0,0);
+	position:absolute;
+}
+
+
+</style>
+
+
 <script>
+
+var position;
+var iterations;
+var displaySpot;
+var colorValue;
+
+function dropAndFade() {
+	if (iterations > 0) {
+		position = position + 25;
+		displaySpot.style.top = position + "px";
+		colorValue = colorValue + 20;
+		displaySpot.style.color = "rgb(255,"+colorValue+","+colorValue+")";
+		iterations--;
+		setTimeout("dropAndFade()", 200); 
+	}
+}
+
+
+
 sayMyName = function() {
 	username = document.getElementById('name').value;
 	output = username + " is the one who knocks.";
-	document.getElementById('display').innerHTML = output;
+	//document.getElementById('display').innerHTML = output;
+	displaySpot = document.getElementById('display');
+	displaySpot.innerHTML = output;
+	iterations = 100;
+	colorValue = 0;
+	position=50;
+	
+	dropAndFade();
+	
 }
 </script>
 
 </head>
 <body>
 
+<div id="nameblock">
 What is your name?<input id="name" type="text" name="myname"/>
-<a href="#" onclick="sayMyName()">submit</a>
-<br/>
+<a href="#" onclick="sayMyName()">submit</a><br/>
+</div>
+
+
 <div id="display"></div>
 
 </body>
