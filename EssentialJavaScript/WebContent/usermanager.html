@@ -32,6 +32,7 @@ register = function() {
 	
 	jsonString = '{"firstName":"Cam","lastName":"Mc","homePhone":"905-555-1212","dob":"November 1, 1975","dor":"2014-03-09T01:09:32.845Z"}';
 	var registrantJson = new Registrant(JSON.parse(jsonString));
+	//what would happen if we just did var registrantJson = JSON.parse(jsonString); instead? Try it!
 	alert(JSON.stringify(registrantJson.firstName));
 	
 	document.getElementById('welcome').innerHTML = 'You have successfully registered, ' + registrantJson.getFullName() + '.';
