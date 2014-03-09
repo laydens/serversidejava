@@ -11,11 +11,12 @@ function Registrant(first, last, phone, birth) {
 	this.dob = birth;
 	this.dor = new Date();
 	
+	for (var prop in first) this[prop] = first[prop];
+	
 	this.getFullName = getFullName;
 	function getFullName() {
 		var fullName = this.firstName + ' ' + this.lastName;
 		return fullName;
-	
 	}
 
 }
@@ -29,12 +30,19 @@ register = function() {
 	
 	var registrant = new Registrant(firstName, lastName, phoneNumber, dob);
 	
-	document.getElementById('welcome').innerHTML = 'You have successfully registered, ' + registrant.getFullName() + '.';
-	document.getElementById('firstname').innerHTML = 'First name: ' + registrant.firstName;
-	document.getElementById('lastname').innerHTML = 'Last name: ' + registrant.lastName;
-	document.getElementById('homephone').innerHTML =  'Phone number: ' + registrant.homePhone;
-	document.getElementById('birthdate').innerHTML =  'Date of birth: ' + registrant.dob;
-	document.getElementById('registerdate').innerHTML = 'Registration date: ' + registrant.dor + '<hr/>';
+	jsonString = '{"firstName":"Cam","lastName":"Mc","homePhone":"905-555-1212","dob":"November 1, 1975","dor":"2014-03-09T01:09:32.845Z"}';
+	var registrantJson = new Registrant(JSON.parse(jsonString));
+	alert(JSON.stringify(registrantJson.firstName));
+	
+	document.getElementById('welcome').innerHTML = 'You have successfully registered, ' + registrantJson.getFullName() + '.';
+	document.getElementById('firstname').innerHTML = 'First name: ' + registrantJson.firstName;
+	document.getElementById('lastname').innerHTML = 'Last name: ' + registrantJson.lastName;
+	document.getElementById('homephone').innerHTML =  'Phone number: ' + registrantJson.homePhone;
+	document.getElementById('birthdate').innerHTML =  'Date of birth: ' + registrantJson.dob;
+	document.getElementById('registerdate').innerHTML = 'Registration date: ' + registrantJson.dor + '<hr/>';
+	document.getElementById('birthdate').innerHTML =  'JSON String: ' + JSON.stringify(registrant);
+	
+	
 
 }
 
@@ -53,7 +61,7 @@ validate = function() {
 
 </script>
 </head>
-<body>
+JSON.stringify(registrant)<body>
 
 Please enter the following information: <br/>
 <div id="registrantdata">
@@ -71,6 +79,9 @@ Date of birth: 	<input id="dob" type="text" name="dob"/><br/>
 <div id="homephone"></div>
 <div id="birthdate"></div><br/>
 <div id="registerdate"></div>
+
+<br/>
+<div id="json"></div>
 
 
 
