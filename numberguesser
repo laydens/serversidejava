@@ -1,0 +1,69 @@
+package com.mcnz;
+
+import java.util.Scanner;
+
+public class NumberGuesser {
+
+	public static void main(String[] args) {
+		
+		do {
+			NumberGuesser.playTheGame();
+			System.out.println("Thanks for playing!");
+			System.out.println("Press Y to play again?");
+		} while (NumberGuesser.garnerInput().equalsIgnoreCase("Y"));
+		System.out.println("Have a nice day");
+	}
+
+	private static void playTheGame() {
+		int secretNumber = NumberGuesser.generateSecretNumber();
+		int guess = 0;
+		System.out.println("\tShhh... The secret number is: " + secretNumber);
+		System.out.print("Guess a number between 0 and 100: ");
+		while (true) {
+			String input = NumberGuesser.garnerInput();
+			if (input.equals("q")) {break;}
+			guess = Integer.parseInt(input);
+
+			String result = NumberGuesser.processResult(guess, secretNumber);
+			NumberGuesser.displayResults(guess, result);
+			if(guess==secretNumber){
+				break;
+			}
+		}
+	}
+
+	private static String processResult(int guess, int secretNumber) {
+		String result = null;
+		if (secretNumber == guess) {
+			result = "right on";
+		} else if (NumberGuesser.guessedTooHigh(guess, secretNumber)) {
+			result = "too high";
+		} else {
+			result = "too low";
+		}
+		return result;
+	}
+	
+	private static void displayResults(int guess, String result) {
+		System.out.print("Your guess of " + guess + " was " + result + ". ");
+	}
+
+	public static int generateSecretNumber() {
+		int secretNumber = (int) (Math.random() * 99 + 1);
+		return secretNumber;
+	}
+
+	public static String garnerInput() {
+		Scanner keyboard = new Scanner(System.in);
+		String input = keyboard.next();
+		return input;
+	}
+
+	public static boolean guessedTooHigh(int guess, int secret) {
+		boolean flag = true;
+		if (guess < secret) {
+			flag = false;
+		}
+		return flag;
+	}
+}
