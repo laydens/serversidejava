@@ -1,0 +1,43 @@
+def input
+  print "\nRock, paper or scissors? (q to quit)\n "
+  return gets.chomp
+end
+
+def goodbye
+  puts "Have a nice day. Thanks for playing."
+end
+
+def display_result(client_choice, server_choice, outcome)
+  print "You chose #{client_choice}. "
+  print "The server chose #{server_choice}. "
+  print "The result is a #{outcome}. "
+end
+
+def result (client_choice, server="rock")
+  result = "error"
+  if client_choice == "rock"
+    result = "tie"
+  end
+
+  if client_choice == "paper"
+    result = "win"
+  end
+
+  if client_choice == "scissors"
+    result = "loss"
+  end
+  return result
+end
+
+loop do
+  server_gesture = "rock"
+  client_gesture = input()
+  if client_gesture == "q"
+    goodbye()
+    break
+  end
+  next if client_gesture == "n"
+  result = result(client_gesture, server_gesture)
+  display_result(client_gesture, server_gesture, result)
+  
+end
